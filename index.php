@@ -4,70 +4,78 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL); // code to report ERRORS
 
+
 function orderPizza($typePizza, $forWho)
 {
+    
     echo 'Creating new order... <br>';
 
-    $price = calculatCost($typePizza);
-        if($forWho == 'koen')
+    $orderBill = pizzaPrice($typePizza);
+    
+        if($forWho == 'Koen')
         {
-            $address = 'a yacht in Antwerp';
+            $address = 'SS Antwerp in Antwerp Poort 1783';
         }
-        else if ($forWho == 'manuele')
+        else if ($forWho == 'Manuele')
         {
-            $address = 'somewhere in Belgium';
+            $address = ' Lommelstraat 80, 8400 Oostende';
         } 
-        else if ($forWho == 'students')
+        else if ($forWho == 'Students')
         {
             $address = 'BeCode office';
         }
+        else if ($forWho == 'Colin')
+        {
+            $address = 'Schommelstraat 71, 9000 Gent';
+        }
 
         $letterA = 'A '.$typePizza;
-    
         $letterA .=' pizza should be sent to '.$forWho.". <br>The address: {$address}.";
         echo $letterA; 
         echo '<br>';
-        echo 'The bill is €'.$price.'.<br>';
+        echo 'The bill is €'.$orderBill.'.<br>';
         echo "Order finished.<br><br>";
+   
     }
-
-    function calculatCost($typePizza)
+    
+    function pizzaPrice($typePizza)
     {
-        if ($typePizza == 'marguerita')
+        if ($typePizza == 'Marguerita')
         {
             $cost = 5;
         }
-        if ($typePizza == 'golden')
+        if ($typePizza == 'Golden')
         {
             $cost = 100;
         }
-        if ($typePizza == 'calzone')
+        if ($typePizza == 'Calzone')
         {
             $cost = 10;
         }
-        if ($typePizza == 'hawaii')
+        if ($typePizza == 'Hawaii')
         {
-            throw new Exception('Computer says no');
+            $cost = ' Computer says no';
         }
-        return $cost;
+        return $cost;  
     }
-    
-    function allPizzasOrderd()
+
+    function order()
     {
-        orderPizza('calzone', 'koen');
-        orderPizza('marguerita', 'manuele');
-        orderPizza('golden', 'students');
+        orderPizza('Calzone', 'Koen');
+        orderPizza('Marguerita', 'Manuele');
+        orderPizza('Golden', 'Students');
+        orderPizza('Hawaii', 'Colin');
     }
-    
-    function make_Allhappy($do_it)
+
+    function send($send)
     {
-    if ($do_it)
+    if ($send)
     {
-        allPizzasOrderd();
+        order();
     }
     else
     {
         // Should not do anything when false
     }
 }
-    make_Allhappy(true);
+    send(true);
